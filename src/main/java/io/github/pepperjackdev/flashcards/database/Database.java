@@ -6,9 +6,12 @@ import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -101,6 +104,28 @@ public class Database {
             createNewCollection.execute();
 
             return new Collection(connectionString, collectionId);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Collection> getDatabaseCollections() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            Statement getCollectionsIds = connection.createStatement();
+            getCollectionsIds.execute("select collectionId from collections");
+
+            ResultSet rs = getCollectionsIds.getResultSet();
+            List<Collection> collections = new ArrayList<>();
+
+            while (rs.next()) {
+                String collectionId = rs.getString("collectionId");
+                Collection toAdd = new Collection(connectionString, collectionId);
+                collections.add(toAdd);
+            }
+
+            return collections;
 
         } catch (SQLException e) {
             e.printStackTrace();

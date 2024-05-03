@@ -1,7 +1,5 @@
 package io.github.pepperjackdev.flashcards;
 
-import java.util.List;
-
 import io.github.pepperjackdev.flashcards.database.Collection;
 import io.github.pepperjackdev.flashcards.database.Database;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
@@ -15,10 +13,18 @@ public class App {
         collection.createNewFlashcard("C++ (or Cpp)", "Procedural and Object Oriented");
         collection.createNewFlashcard("Haskell", "Functional");
 
-        List<Flashcard> flashcards = collection.getCollectionFlashcards();
-        flashcards.forEach(f -> System.out.println(f.getQuestion() + " /// " + f.getAnswear()));
+        // for each collection into the database
+        for (Collection c: db.getDatabaseCollections()) {
+            System.out.println(">> Collection -> %s:".formatted(c.getTitle()));
+            System.out.println(">>              %s".formatted(c.getDescription()));
+            // for each flashcards of the collection
+            for (Flashcard f: c.getCollectionFlashcards()) {
+                System.out.println("\t - FC: %s? - %s".formatted(f.getQuestion(), f.getAnswear()));
+            }
 
-        collection.emptyCollection();
-        db.deleteCollection(collection.getCollectionId());
+            if (c.getCollectionFlashcards().isEmpty()) {
+                System.out.println("\t <empty>");
+            }
+        }
     }
 }

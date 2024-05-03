@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +18,72 @@ public class Collection {
     protected Collection(String connectionString, String collectionId) {
         this.connectionString = connectionString;
         this.collectionId = collectionId;
+    }
+    
+    public String getId() {
+        return collectionId;
+    }
+
+    public String getTitle() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getCollectionTitle = connection.prepareStatement("select title from collections where collectionId=?");
+            getCollectionTitle.setString(1, collectionId);
+            getCollectionTitle.execute();
+
+            ResultSet rs = getCollectionTitle.getResultSet();
+            return rs.getString("title");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getDescription() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getCollectionDescription = connection.prepareStatement("select description from collections where collectionId=?");
+            getCollectionDescription.setString(1, collectionId);
+            getCollectionDescription.execute();
+
+            ResultSet rs = getCollectionDescription.getResultSet();
+            return rs.getString("description");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public LocalDateTime getDatetimeOfCreation() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getCollectionDescription = connection.prepareStatement("select datetimeOfCreation from collections where collectionId=?");
+            getCollectionDescription.setString(1, collectionId);
+            getCollectionDescription.execute();
+
+            ResultSet rs = getCollectionDescription.getResultSet();
+            String timestamp = rs.getString("datetimeOfCreation");
+            return LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public LocalDateTime getDatetimeOfLastModification() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getCollectionDescription = connection.prepareStatement("select datetimeOfLastModification from collections where collectionId=?");
+            getCollectionDescription.setString(1, collectionId);
+            getCollectionDescription.execute();
+
+            ResultSet rs = getCollectionDescription.getResultSet();
+            String timestamp = rs.getString("datetimeOfLastModification");
+            return LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Flashcard createNewFlashcard(String question, String answear) {
@@ -91,9 +159,5 @@ public class Collection {
         for (Flashcard flashcard: flashcards) {
             deleteFlashcard(flashcard.getFlashcardId());
         }
-    }
-    
-    public String getCollectionId() {
-        return collectionId;
     }
 }
