@@ -7,23 +7,14 @@ import io.github.pepperjackdev.flashcards.database.Flashcard;
 public class App {
     public static void main(String[] args) {
         Database db = new Database();
-        Collection collection = db.createNewCollection("Computer science", "Programming paradigms");
-        collection.createNewFlashcard("Java", "Object Oriented");
-        collection.createNewFlashcard("C#", "Object Oriented");
-        collection.createNewFlashcard("C++ (or Cpp)", "Procedural and Object Oriented");
-        collection.createNewFlashcard("Haskell", "Functional");
+        Collection programmingMottos = db.createNewCollection("Programming Mottos", "A collection that shouldn't exist");
+        Flashcard wrongFlashcard = programmingMottos.createNewFlashcard("Javian's motto", "Write Once, Debug Everywhere"); // isn't it Run Everywhere?
+        wrongFlashcard.setAnswer("Write Once, Run Everywhere");
 
-        // for each collection into the database
-        for (Collection c: db.getDatabaseCollections()) {
-            System.out.println(">> Collection -> %s:".formatted(c.getTitle()));
-            System.out.println(">>              %s".formatted(c.getDescription()));
-            // for each flashcards of the collection
-            for (Flashcard f: c.getCollectionFlashcards()) {
-                System.out.println("\t - FC: %s? - %s".formatted(f.getQuestion(), f.getAnswear()));
-            }
-
-            if (c.getCollectionFlashcards().isEmpty()) {
-                System.out.println("\t <empty>");
+        // some info
+        for (Collection c: db.getCollections()) {
+            for (Flashcard f: c.getFlashcards()) {
+                System.out.printf(">>> Q: %s -> A: %s\n", f.getQuestion(), f.getAnswer());
             }
         }
     }

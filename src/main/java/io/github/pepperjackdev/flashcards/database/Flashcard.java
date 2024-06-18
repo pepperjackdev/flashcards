@@ -35,15 +35,28 @@ public class Flashcard {
         }
     }
 
-    public String getAnswear() {
+    public void setQuestion(String question) {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
-            PreparedStatement getAnswear = connection.prepareStatement("select answear from flashcards where flashcardId=?");
+            PreparedStatement setQuestion = connection.prepareStatement("update flashcards set question=? where flashcardId=?");
+            setQuestion.setString(1, question);
+            setQuestion.setString(2, flashcardId);
+
+            setQuestion.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getAnswer() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getAnswear = connection.prepareStatement("select answer from flashcards where flashcardId=?");
             getAnswear.setString(1, this.flashcardId);
 
             getAnswear.execute();
 
-            ResultSet answear = getAnswear.getResultSet();
-            return answear.getString("answear");
+            ResultSet answer = getAnswear.getResultSet();
+            return answer.getString("answer");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,7 +64,20 @@ public class Flashcard {
         }
     }
 
-    public Collection getCollection() {
+    public void setAnswer(String answer) {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement setAnswer = connection.prepareStatement("update flashcards set answer=? where flashcardId=?");
+            setAnswer.setString(1, answer);
+            setAnswer.setString(2, flashcardId);
+
+            setAnswer.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Collection getParentCollection() {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement getCollectionId = connection.prepareStatement("select collectionId from flashcards where flashcardId=?");
             getCollectionId.setString(1, flashcardId);

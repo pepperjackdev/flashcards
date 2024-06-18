@@ -39,6 +39,20 @@ public class Collection {
         }
     }
 
+    public void setTitle(String title) {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement updateCollectionTitle = connection.prepareStatement("update collections set title=? where collectionId=?");
+
+            updateCollectionTitle.setString(1, title);
+            updateCollectionTitle.setString(2, collectionId);
+
+            updateCollectionTitle.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getDescription() {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement getCollectionDescription = connection.prepareStatement("select description from collections where collectionId=?");
@@ -51,6 +65,20 @@ public class Collection {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void setDescription(String description) {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement updateCollectionDescription = connection.prepareStatement("update collections set description=? where collectionId=?");
+
+            updateCollectionDescription.setString(1, description);
+            updateCollectionDescription.setString(2, collectionId);
+
+            updateCollectionDescription.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -86,13 +114,27 @@ public class Collection {
         }
     }
 
+    public void updateDatetimeOfLastModification() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement updateDatetimeOfLastModification = connection.prepareStatement("update collections set datetimeOfLastModification=? where collectionId=?");
+
+            updateDatetimeOfLastModification.setString(1, LocalDateTime.now().toString());
+            updateDatetimeOfLastModification.setString(2, collectionId);
+
+            updateDatetimeOfLastModification.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Flashcard createNewFlashcard(String question, String answear) {
         String flashcardId = UUID.randomUUID().toString();
 
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             
             PreparedStatement insertNewFlashcard = connection.prepareStatement(
-                "insert into flashcards (flashcardId, question, answear, collectionId) values (?, ?, ?, ?)"
+                "insert into flashcards (flashcardId, question, answer, collectionId) values (?, ?, ?, ?)"
             );
 
             insertNewFlashcard.setString(1, flashcardId);
@@ -110,7 +152,7 @@ public class Collection {
         }
     }
 
-    public List<Flashcard> getCollectionFlashcards() {
+    public List<Flashcard> getFlashcards() {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement getCollectionFlashcardsIds = connection.prepareStatement("select flashcardId from flashcards where collectionId=?");
             getCollectionFlashcardsIds.setString(1, collectionId);
@@ -155,7 +197,7 @@ public class Collection {
     }
 
     public void emptyCollection() {
-        List<Flashcard> flashcards = getCollectionFlashcards();
+        List<Flashcard> flashcards = getFlashcards();
         for (Flashcard flashcard: flashcards) {
             deleteFlashcard(flashcard.getFlashcardId());
         }

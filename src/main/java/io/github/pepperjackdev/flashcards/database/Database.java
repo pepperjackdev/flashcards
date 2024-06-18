@@ -59,12 +59,12 @@ public class Database {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
 
             // creating the flashcards table
-            Statement initializedFlashcardsTable = connection.createStatement();
-            initializedFlashcardsTable.execute(
+            Statement initializeFlashcardsTable = connection.createStatement();
+            initializeFlashcardsTable.execute(
                 "create table flashcards (\r\n" + //
                     "\tflashcardId text,\r\n" + //
                     "\tquestion text,\r\n" + //
-                    "\tanswear text,\r\n" + //
+                    "\tanswer text,\r\n" + //
                     "\tcollectionId text\r\n" + //
                 ");"
             );
@@ -111,7 +111,7 @@ public class Database {
         }
     }
 
-    public List<Collection> getDatabaseCollections() {
+    public List<Collection> getCollections() {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             Statement getCollectionsIds = connection.createStatement();
             getCollectionsIds.execute("select collectionId from collections");
@@ -146,7 +146,6 @@ public class Database {
             );
 
             deleteCollection.setString(1, collectionId);
-
             deleteCollection.execute();
 
         } catch (SQLException e) {
