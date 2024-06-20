@@ -1,3 +1,9 @@
+
+# destination directory of compiled sources
 target/
+
+# .vscode directory
 .vscode/
+
+# the application's database
 data.db
