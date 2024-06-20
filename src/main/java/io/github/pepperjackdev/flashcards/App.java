@@ -11,14 +11,20 @@ public class App
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = loadFXML("collections.fxml");
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(loadFXML("collections.fxml"));
         stage.setScene(scene);
         stage.setTitle("Flashcards");
+        stage.sizeToScene();
         stage.show();
+
+        // Set the minimum size of the window to the size of the scene
+        stage.setMinHeight(scene.getHeight());
+        stage.setMinWidth(scene.getWidth());
     }
 
-    private static Parent loadFXML(String fxml) {
+    public static Parent loadFXML(String fxml) {
+        // Load the FXML file and return the root node
+
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
             return loader.load();
