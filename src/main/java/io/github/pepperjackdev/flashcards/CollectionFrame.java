@@ -31,5 +31,15 @@ public class CollectionFrame
         title.setText(collection.getTitle());
         description.setText(collection.getDescription());
         lastModified.setText(collection.getDatetimeOfLastModification().toString());
+
+        // initialize buttons
+
+        delete.setOnAction(e -> {
+            // delete collection
+            App.database.deleteCollection(collection.getId());
+
+            // let's refresh the collections view
+            App.setRoot("collections.fxml");
+        });
     }
 }
