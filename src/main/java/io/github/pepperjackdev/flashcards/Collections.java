@@ -1,18 +1,38 @@
 package io.github.pepperjackdev.flashcards;
 
+import java.io.IOException;
+import java.util.List;
+
+import io.github.pepperjackdev.flashcards.database.Collection;
+import io.github.pepperjackdev.flashcards.database.Database;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class Collections {
+
+    Database db = new Database();
+
     @FXML Button addCollection;
     @FXML VBox collectionsList;
 
-    @FXML void initialize() {
-        addCollection.setOnAction(e -> {
-            Parent newCollectionFrame = App.loadFXML("collections/collection_frame.fxml");
-            collectionsList.getChildren().add(newCollectionFrame);
-        });
+    @FXML void initialize() throws IOException {
+        // initializing the collections list
+        List<Collection> collections = db.getCollections();
+        for (Collection collection: collections) {
+            // getting the loader of a new collection frame
+            FXMLLoader loader = App.getLoader("collection_frame.fxml");
+
+            // creating and initializing its controller
+            CollectionFrame controller = new CollectionFrame();
+            controller.initData(collection);
+
+            // adding the controller to the loader
+            loader.setController(controller);
+
+            // adding the collection frame to the collections list
+            collectionsList.getChildren().add(loader.load());
+        }
     }
 }

@@ -25,9 +25,22 @@ public class App
     public static Parent loadFXML(String fxml) {
         // Load the FXML file and return the root node
 
+        FXMLLoader loader = getLoader(fxml);
+
+        try {
+            return loader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static FXMLLoader getLoader(String fxml) {
+        // Load the FXML file and return the FXMLLoader object
+
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
-            return loader.load();
+            return loader;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
