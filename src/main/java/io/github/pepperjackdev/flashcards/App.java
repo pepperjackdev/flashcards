@@ -22,10 +22,6 @@ public class App
     }
 
     public static void setRoot(Scene scene) {
-        // Set the root of the stage to the FXML file
-
-        double width = stage.getScene().getWidth();
-
         stage.setScene(scene);
         stage.show();
 
