@@ -1,9 +1,9 @@
 package io.github.pepperjackdev.flashcards;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.io.IOException;
 
 import io.github.pepperjackdev.flashcards.database.Collection;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
@@ -18,7 +18,7 @@ public class Flashcards
 
     private Collection collection;
 
-    @FXML Button addFlashcards;
+    @FXML Button addFlashcard;
     @FXML Button goToCollections;
 
     @FXML VBox flashcardsList;
@@ -50,5 +50,24 @@ public class Flashcards
                 e.printStackTrace();
             }
         }
+
+        goToCollections.setOnAction(e -> {
+            App.setRoot("collections.fxml");
+        });
+
+        addFlashcard.setOnAction(event -> {
+            Flashcard flashcard = collection.createNewFlashcard("Question", "Answer");
+
+            FXMLLoader loader = App.getLoader("flashcard_frame.fxml");
+            FlashcardFrame controller = new FlashcardFrame();
+            controller.initData(flashcard);
+            loader.setController(controller);
+            
+            try {
+                flashcardsList.getChildren().add(loader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

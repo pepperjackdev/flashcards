@@ -24,13 +24,14 @@ public class App
     public static void setRoot(Scene scene) {
         // Set the root of the stage to the FXML file
 
+        double width = stage.getScene().getWidth();
+
         stage.setScene(scene);
-        stage.sizeToScene();
         stage.show();
 
         // Set the minimum size of the window to the size of the scene
-        stage.setMinHeight(scene.getHeight());
-        stage.setMinWidth(scene.getWidth());
+        // stage.setMinHeight(scene.getHeight());
+        // stage.setMinWidth(scene.getWidth());
     }
 
     public static void setRoot(String fxml) {

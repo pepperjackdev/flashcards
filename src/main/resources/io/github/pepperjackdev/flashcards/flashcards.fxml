@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="350.0" minWidth="600.0" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" >
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="350.0" minWidth="600.0" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" minHeight="40.0" BorderPane.alignment="CENTER">
          <buttons>
             <Button fx:id="goToCollections" mnemonicParsing="false" text="Go back to collections" />
-            <Button fx:id="addFlashcards" mnemonicParsing="false" text="Add a new flashcard" />
+            <Button fx:id="addFlashcard" mnemonicParsing="false" text="Add a new flashcard" />
          </buttons>
       </ButtonBar>
    </bottom>

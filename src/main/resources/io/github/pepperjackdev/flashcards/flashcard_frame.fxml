@@ -14,12 +14,12 @@
          <children>
             <StackPane alignment="CENTER_LEFT">
                <children>
-                  <TextField fx:id="question" />
+                  <TextField fx:id="question" editable="false" />
                </children>
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
-                  <TextField fx:id="answer" />
+                  <TextField fx:id="answer" editable="false" />
                </children>
             </StackPane>
          </children>
