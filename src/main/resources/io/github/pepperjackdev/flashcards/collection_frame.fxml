@@ -39,7 +39,7 @@
       <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <buttons>
             <Button fx:id="view" mnemonicParsing="false" text="View" />
-            <Button fx:id="revise" mnemonicParsing="false" text="Revise" />
+            <Button fx:id="revise" mnemonicParsing="false" text="Play" />
             <Button fx:id="delete" mnemonicParsing="false" text="Delete" />
          </buttons>
       </ButtonBar>

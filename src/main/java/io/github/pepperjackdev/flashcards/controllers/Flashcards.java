@@ -3,7 +3,6 @@ package io.github.pepperjackdev.flashcards.controllers;
 import static io.github.pepperjackdev.flashcards.constants.Constants.COLLECTIONS_FXML;
 import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARD_FRAME_FXML;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,10 +12,8 @@ import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Collection;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -61,17 +58,11 @@ public class Flashcards
 
         addFlashcard.setOnAction(event -> {
             Flashcard flashcard = collection.createNewFlashcard("Question", "Answer");
-
-            FXMLLoader loader = App.getLoader("flashcard_frame.fxml");
             FlashcardFrame controller = new FlashcardFrame();
-            controller.load(flashcard);
-            loader.setController(controller);
-            
-            try {
-                flashcardsList.getChildren().add(loader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            controller.load(flashcard);            
+            flashcardsList.getChildren().add(
+                App.loadFXML(FLASHCARD_FRAME_FXML, controller)
+            );
         });
     }
 }

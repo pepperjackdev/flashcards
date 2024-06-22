@@ -14,6 +14,8 @@ import java.io.IOException;
 public class App
     extends Application{
 
+    // FIXME resizing system
+
     private static Stage stage;
     public static Database database = new Database();
 

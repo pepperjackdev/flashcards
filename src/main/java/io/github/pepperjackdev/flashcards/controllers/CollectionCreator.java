@@ -1,5 +1,7 @@
 package io.github.pepperjackdev.flashcards.controllers;
 
+import static io.github.pepperjackdev.flashcards.constants.Constants.COLLECTIONS_FXML;
+
 import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.database.Database;
 import javafx.fxml.FXML;
@@ -30,11 +32,11 @@ public class CollectionCreator {
             }
 
             db.createNewCollection(title, description);
-            App.setRoot("collections.fxml");
+            App.setRoot(COLLECTIONS_FXML);
         });
 
         cancel.setOnAction(e -> {
-            App.setRoot("collections.fxml");
+            App.setRoot(COLLECTIONS_FXML);
         });
     }
 }

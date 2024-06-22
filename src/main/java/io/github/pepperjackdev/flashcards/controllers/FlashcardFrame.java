@@ -1,23 +1,22 @@
 package io.github.pepperjackdev.flashcards.controllers;
 
-import java.io.IOException;
+import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARDS_FXML;
 
 import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class FlashcardFrame
     implements Loadable<Flashcard> {
     
     private Flashcard flashcard;
 
-    @FXML TextField question;
-    @FXML TextField answer;
+    @FXML Label question;
+    @FXML Label answer;
 
     @FXML Button edit;
     @FXML Button delete;
@@ -27,42 +26,28 @@ public class FlashcardFrame
     }
 
     @FXML void initialize() {
+
+        //
+        // load the flashcard data
+        //
+
         question.setText(flashcard.getQuestion());
         answer.setText(flashcard.getAnswer());
 
+        //
+        // init the buttons behaviors
+        //
+
         delete.setOnAction(e -> {
             // reload the flashcards view
-            
-            // get the loader of the flashcards view
-            FXMLLoader loader = App.getLoader("flashcards.fxml");
+
             Flashcards controller = new Flashcards();
             controller.load(flashcard.getParentCollection());
-            loader.setController(controller);
-            
             flashcard.getParentCollection().deleteFlashcard(flashcard.getFlashcardId());
+            App.setRoot(
+                new Scene(App.loadFXML(FLASHCARDS_FXML, controller))
+            );
             
-            try {
-                App.setRoot(new Scene(loader.load()));
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            
-        });
-
-        edit.setOnAction(event -> {
-            // if the text is edit, then we are editing
-            if (edit.getText().equals("Edit")) {
-                edit.setText("Save");
-                question.setEditable(true);
-                answer.setEditable(true);
-                return;
-            } else {
-                edit.setText("Edit");
-                flashcard.setQuestion(question.getText());
-                flashcard.setAnswer(answer.getText());
-                question.setEditable(false);
-                answer.setEditable(false);
-            }
         });
     }
 }

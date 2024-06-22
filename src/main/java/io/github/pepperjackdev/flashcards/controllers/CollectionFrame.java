@@ -1,6 +1,8 @@
 package io.github.pepperjackdev.flashcards.controllers;
 
-import java.io.IOException;
+import static io.github.pepperjackdev.flashcards.constants.Constants.COLLECTIONS_FXML;
+import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARDS_FXML;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -8,14 +10,11 @@ import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Collection;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
-import static io.github.pepperjackdev.flashcards.constants.Constants.*;
 
 public class CollectionFrame
     implements Initializable, Loadable<Collection> {
