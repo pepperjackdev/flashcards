@@ -7,7 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class App 
+import static io.github.pepperjackdev.flashcards.constants.Constants.*;
+
+import java.io.IOException;
+
+public class App
     extends Application{
 
     private static Stage stage;
@@ -16,14 +20,14 @@ public class App
     @Override
     public void start(Stage stage) throws Exception {
         App.stage = stage;
-        stage.setTitle("Flashcards");
 
-        setRoot("collections.fxml");
+        stage.setTitle("Flashcards");
+        setRoot(COLLECTIONS_FXML);
+        stage.show();
     }
 
     public static void setRoot(Scene scene) {
         stage.setScene(scene);
-        stage.show();
 
         // Set the minimum size of the window to the size of the scene
         // stage.setMinHeight(scene.getHeight());
@@ -34,27 +38,34 @@ public class App
         setRoot(new Scene(loadFXML(fxml)));
     }
 
-    public static Parent loadFXML(String fxml) {
+    public static <T> Parent loadFXML(String fxml, T controller) {
+        FXMLLoader loader = getLoader(fxml);
+        loader.setController(controller);
+        
+        try {
+            return loader.load();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public static Parent loadFXML(String fxml) {
         FXMLLoader loader = getLoader(fxml);
 
         try {
             return loader.load();
-        } catch (Exception e) {
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
     }
 
     public static FXMLLoader getLoader(String fxml) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
-            return loader;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
+        return loader;
     }
 
     public static void main(String[] args) {

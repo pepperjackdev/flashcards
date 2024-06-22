@@ -1,7 +1,9 @@
-package io.github.pepperjackdev.flashcards;
+package io.github.pepperjackdev.flashcards.controllers;
 
 import java.io.IOException;
 
+import io.github.pepperjackdev.flashcards.App;
+import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class FlashcardFrame {
+public class FlashcardFrame
+    implements Loadable<Flashcard> {
     
     private Flashcard flashcard;
 
@@ -19,7 +22,7 @@ public class FlashcardFrame {
     @FXML Button edit;
     @FXML Button delete;
 
-    void initData(Flashcard flashcard) {
+    public void load(Flashcard flashcard) {
         this.flashcard = flashcard;
     }
 
@@ -33,7 +36,7 @@ public class FlashcardFrame {
             // get the loader of the flashcards view
             FXMLLoader loader = App.getLoader("flashcards.fxml");
             Flashcards controller = new Flashcards();
-            controller.initData(flashcard.getParentCollection());
+            controller.load(flashcard.getParentCollection());
             loader.setController(controller);
             
             flashcard.getParentCollection().deleteFlashcard(flashcard.getFlashcardId());

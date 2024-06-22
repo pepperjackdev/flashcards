@@ -1,12 +1,13 @@
-package io.github.pepperjackdev.flashcards;
+package io.github.pepperjackdev.flashcards.controllers;
 
+import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.database.Database;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class CollectionAdd {
+public class CollectionCreator {
     
     @FXML TextField collectionTitle;
     @FXML TextField collectionDescription;

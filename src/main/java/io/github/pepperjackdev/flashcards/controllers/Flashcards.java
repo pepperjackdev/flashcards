@@ -1,20 +1,27 @@
-package io.github.pepperjackdev.flashcards;
+package io.github.pepperjackdev.flashcards.controllers;
+
+import static io.github.pepperjackdev.flashcards.constants.Constants.COLLECTIONS_FXML;
+import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARD_FRAME_FXML;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import io.github.pepperjackdev.flashcards.App;
+import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Collection;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 public class Flashcards
-    implements Initializable {
+    implements Initializable, Loadable<Collection> {
 
     private Collection collection;
 
@@ -23,36 +30,33 @@ public class Flashcards
 
     @FXML VBox flashcardsList;
 
-    void initData(Collection collection) {
+    public void load(Collection collection) {
         this.collection = collection;
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //
+        // load the flashcards from the collection
+        //
+
         List<Flashcard> flashcards = collection.getFlashcards();
 
         for (Flashcard flashcard: flashcards) {
-            // getting the loader of a new collection frame
-            FXMLLoader loader = App.getLoader("flashcard_frame.fxml");
-
-            // creating and initializing its controller
             FlashcardFrame controller = new FlashcardFrame();
-            controller.initData(flashcard);
-
-            // adding the controller to the loader
-            loader.setController(controller);
-
-            // adding the collection frame to the collections list
-            try {
-                flashcardsList.getChildren().add(loader.load());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            controller.load(flashcard);
+            
+            Parent scene = App.loadFXML(FLASHCARD_FRAME_FXML, controller);
+            flashcardsList.getChildren().add(scene);
         }
 
-        goToCollections.setOnAction(e -> {
-            App.setRoot("collections.fxml");
+        //
+        // init the buttons behaviors
+        //
+
+        goToCollections.setOnAction(event -> {
+            App.setRoot(COLLECTIONS_FXML);
         });
 
         addFlashcard.setOnAction(event -> {
@@ -60,7 +64,7 @@ public class Flashcards
 
             FXMLLoader loader = App.getLoader("flashcard_frame.fxml");
             FlashcardFrame controller = new FlashcardFrame();
-            controller.initData(flashcard);
+            controller.load(flashcard);
             loader.setController(controller);
             
             try {

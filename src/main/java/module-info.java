@@ -5,6 +5,9 @@ module io.github.pepperjackdev.flashcards {
     requires java.sql.rowset;
 
     opens io.github.pepperjackdev.flashcards to javafx.fxml;
+    opens io.github.pepperjackdev.flashcards.controllers to javafx.fxml;
+
     exports io.github.pepperjackdev.flashcards;
     exports io.github.pepperjackdev.flashcards.database;
+    exports io.github.pepperjackdev.flashcards.controllers;
 }
