@@ -16,6 +16,7 @@ public class CollectionAdd {
     private Database db = new Database();
 
     @FXML void initialize() {
+        
         addCollection.setOnAction(e -> {
             String title = collectionTitle.getText();
             String description = collectionDescription.getText();

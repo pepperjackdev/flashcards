@@ -36,5 +36,6 @@ public class Collections {
         addCollection.setOnAction(e -> {
             App.setRoot("add_collection.fxml");
         });
+
     }
 }

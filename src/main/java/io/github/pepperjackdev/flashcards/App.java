@@ -21,8 +21,23 @@ public class App
         setRoot("collections.fxml");
     }
 
+    public static void setRoot(Scene scene) {
+        // Set the root of the stage to the FXML file
+
+        stage.setScene(scene);
+        stage.sizeToScene();
+        stage.show();
+
+        // Set the minimum size of the window to the size of the scene
+        stage.setMinHeight(scene.getHeight());
+        stage.setMinWidth(scene.getWidth());
+    }
+
+    public static void setRoot(String fxml) {
+        setRoot(new Scene(loadFXML(fxml)));
+    }
+
     public static Parent loadFXML(String fxml) {
-        // Load the FXML file and return the root node
 
         FXMLLoader loader = getLoader(fxml);
 
@@ -34,21 +49,7 @@ public class App
         }
     }
 
-    public static void setRoot(String fxml) {
-        // Set the root of the stage to the FXML file
-
-        Scene scene = new Scene(loadFXML(fxml));
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
-
-        // Set the minimum size of the window to the size of the scene
-        stage.setMinHeight(scene.getHeight());
-        stage.setMinWidth(scene.getWidth());
-    }
-
     public static FXMLLoader getLoader(String fxml) {
-        // Load the FXML file and return the FXMLLoader object
 
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml));
