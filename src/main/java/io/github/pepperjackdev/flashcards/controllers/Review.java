@@ -13,8 +13,10 @@ import javafx.scene.control.Label;
 public class Review 
     implements Loadable<Collection> {
 
-    private Collection collection;
+    @SuppressWarnings("unused")
+    private Collection collection; // future implementation of other features
     private ReviewSession review;
+    private boolean flipped = false;
 
     @FXML Label text;
 
@@ -34,14 +36,20 @@ public class Review
     void initialize() {
 
         // let's init the data
-        update(review.current().getQuestion());
+        update();
 
         next.setOnAction(e -> {
-            // FIXME
+            if (review.hasNextFlashcard()) {
+                review.next();
+                update();
+            }
         });
 
         previous.setOnAction(e -> {
-            // FIXME
+            if (review.hasPreviousFlashcard()) {
+                review.previous();
+                update();
+            }
         });
 
         stop.setOnAction(e -> {
@@ -50,15 +58,38 @@ public class Review
         });
 
         flip.setOnAction(e -> {
-            // FIXME
+            if (text.getText().equals(review.current().getQuestion())) {
+                update(review.current().getAnswer());
+            } else {
+                update(review.current().getQuestion());
+            }
         });
 
         flipAll.setOnAction(e -> {
-            // FIXME
+            this.flipped = !flipped;
+            update();
         });
     }
 
+    public void update() {
+        update(flipped ? review.current().getAnswer() : review.current().getQuestion());
+    }
+
     public void update(String textToShow) {
+        
         text.setText(textToShow);
+
+        if (!review.hasPreviousFlashcard()) {
+            previous.setDisable(true);
+        } else {
+            previous.setDisable(false);
+        }
+
+        if (!review.hasNextFlashcard()) {
+            next.setDisable(true);
+        } else {
+            next.setDisable(false);
+        }
+
     }
 }

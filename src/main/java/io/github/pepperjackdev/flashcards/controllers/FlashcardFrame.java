@@ -7,17 +7,16 @@ import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class FlashcardFrame
     implements Loadable<Flashcard> {
     
     private Flashcard flashcard;
 
-    @FXML Label question;
-    @FXML Label answer;
+    @FXML TextArea question;
+    @FXML TextArea answer;
 
-    @FXML Button edit;
     @FXML Button delete;
 
     public void load(Flashcard flashcard) {
@@ -36,6 +35,14 @@ public class FlashcardFrame
         //
         // init the buttons behaviors
         //
+
+        question.setOnKeyTyped(e -> {
+            flashcard.setQuestion(question.getText());
+        });
+
+        answer.setOnKeyTyped(e -> {
+            flashcard.setAnswer(answer.getText());
+        });
 
         delete.setOnAction(e -> {
             // reload the flashcards view

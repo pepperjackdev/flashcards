@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
-import io.github.pepperjackdev.flashcards.core.ReviewSession;
 import io.github.pepperjackdev.flashcards.database.Collection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

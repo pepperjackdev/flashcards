@@ -31,7 +31,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="text" text="A blank page: the most dangerous question" />
+            <Label fx:id="text" text="A blank page: the most dangerous question" wrapText="true" />
          </children>
       </StackPane>
    </center>
