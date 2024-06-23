@@ -28,16 +28,17 @@ public class App
         stage.show();
     }
 
-    public static void setRoot(Scene scene) {
-        stage.setScene(scene);
+    public static void setRoot(Parent root) {
 
-        // Set the minimum size of the window to the size of the scene
-        // stage.setMinHeight(scene.getHeight());
-        // stage.setMinWidth(scene.getWidth());
+        if (stage.getScene() == null) {
+            stage.setScene(new Scene(root));
+        } else {
+            stage.getScene().setRoot(root);
+        }
     }
 
     public static void setRoot(String fxml) {
-        setRoot(new Scene(loadFXML(fxml)));
+        setRoot(loadFXML(fxml));
     }
 
     public static <T> Parent loadFXML(String fxml, T controller) {

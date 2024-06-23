@@ -18,7 +18,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="collectionsList" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="collectionsList" />
          </content></ScrollPane>
    </center>
    <top>

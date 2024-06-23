@@ -2,16 +2,17 @@ package io.github.pepperjackdev.flashcards.controllers;
 
 import static io.github.pepperjackdev.flashcards.constants.Constants.COLLECTIONS_FXML;
 import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARDS_FXML;
+import static io.github.pepperjackdev.flashcards.constants.Constants.REVIEW_COLLECTION_FXML;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
+import io.github.pepperjackdev.flashcards.core.ReviewSession;
 import io.github.pepperjackdev.flashcards.database.Collection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +27,7 @@ public class CollectionFrame
     @FXML Label lastModified;
 
     @FXML Button view;
-    @FXML Button revise;
+    @FXML Button review;
     @FXML Button delete;
 
     public void load(Collection collection) {
@@ -70,12 +71,17 @@ public class CollectionFrame
         // view the collection
         view.setOnAction(event -> {
             Flashcards controller = new Flashcards();
-            controller.load(collection);
-
-            Scene scene = new Scene(App.loadFXML(FLASHCARDS_FXML, controller));
-            App.setRoot(scene);
+            controller.load(collection);;
+            App.setRoot(App.loadFXML(FLASHCARDS_FXML, controller));
         });
 
-        
+        review.setOnAction(event -> {
+            Review controller = new Review();
+            controller.load(collection);
+            
+            App.setRoot(
+                App.loadFXML(REVIEW_COLLECTION_FXML, controller)
+            );
+        });
     }
 }

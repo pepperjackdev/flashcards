@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="350.0" minWidth="600.0" stylesheets="@style/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" minHeight="40.0" BorderPane.alignment="CENTER">
+         <buttons>
+            <Button fx:id="previous" mnemonicParsing="false" text="Previous" />
+            <Button fx:id="stop" mnemonicParsing="false" text="Stop" />
+            <Button fx:id="flip" mnemonicParsing="false" text="Flip" />
+            <Button fx:id="flipAll" mnemonicParsing="false" text="Flip all" />
+            <Button fx:id="next" mnemonicParsing="false" text="Next" />
+         </buttons>
+      </ButtonBar>
+   </bottom>
+   <top>
+      <Pane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <Pane prefWidth="30.0" BorderPane.alignment="CENTER" />
+   </right>
+   <left>
+      <Pane prefWidth="30.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="text" text="A blank page: the most dangerous question" />
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

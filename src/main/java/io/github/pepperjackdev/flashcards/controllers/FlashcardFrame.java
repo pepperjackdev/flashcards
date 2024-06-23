@@ -6,7 +6,6 @@ import io.github.pepperjackdev.flashcards.App;
 import io.github.pepperjackdev.flashcards.controllers.loadable.Loadable;
 import io.github.pepperjackdev.flashcards.database.Flashcard;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -45,7 +44,7 @@ public class FlashcardFrame
             controller.load(flashcard.getParentCollection());
             flashcard.getParentCollection().deleteFlashcard(flashcard.getFlashcardId());
             App.setRoot(
-                new Scene(App.loadFXML(FLASHCARDS_FXML, controller))
+                App.loadFXML(FLASHCARDS_FXML, controller)
             );
             
         });

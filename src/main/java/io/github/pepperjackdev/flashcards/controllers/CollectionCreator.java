@@ -29,6 +29,7 @@ public class CollectionCreator {
                 alert.setTitle("Error: invalid title or description");
                 alert.setHeaderText("Title or description is empty: please, fill in the required fields");
                 alert.showAndWait();
+                return;
             }
 
             db.createNewCollection(title, description);
