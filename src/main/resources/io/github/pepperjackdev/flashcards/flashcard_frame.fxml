@@ -9,22 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <StackPane alignment="CENTER_LEFT" focusTraversable="true">
-               <children>
-                  <TextArea fx:id="question" prefRowCount="4" wrapText="true" />
-               </children>
-            </StackPane>
-            <StackPane alignment="CENTER_LEFT" focusTraversable="true" prefWidth="200.0">
-               <children>
-                  <TextArea fx:id="answer" prefRowCount="4" wrapText="true" />
-               </children>
-            </StackPane>
-         </children>
-      </VBox>
-   </left>
    <right>
       <ButtonBar BorderPane.alignment="CENTER">
          <buttons>
@@ -38,4 +22,24 @@
    <top>
       <Separator prefWidth="200.0" BorderPane.alignment="CENTER" />
    </top>
+   <center>
+      <StackPane>
+         <children>
+            <VBox>
+               <children>
+                  <StackPane alignment="CENTER_LEFT" focusTraversable="true">
+                     <children>
+                        <TextArea fx:id="question" prefRowCount="0" promptText="Question (first side)" wrapText="true" />
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER_LEFT" focusTraversable="true">
+                     <children>
+                        <TextArea fx:id="answer" prefRowCount="0" promptText="Answer (second side)" wrapText="true" />
+                     </children>
+                  </StackPane>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
 </BorderPane>

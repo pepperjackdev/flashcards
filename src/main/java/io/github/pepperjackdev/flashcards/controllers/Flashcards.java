@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class Flashcards
@@ -24,6 +25,9 @@ public class Flashcards
 
     @FXML Button addFlashcard;
     @FXML Button goToCollections;
+
+    @FXML TextField title;
+    @FXML TextField description;
 
     @FXML VBox flashcardsList;
 
@@ -38,6 +42,9 @@ public class Flashcards
         // load the flashcards from the collection
         //
 
+        title.setText(collection.getTitle());
+        description.setText(collection.getDescription());
+
         List<Flashcard> flashcards = collection.getFlashcards();
 
         for (Flashcard flashcard: flashcards) {
@@ -51,6 +58,14 @@ public class Flashcards
         //
         // init the buttons behaviors
         //
+
+        title.setOnKeyPressed(event -> {
+            collection.setTitle(title.getText());
+        });
+
+        description.setOnKeyPressed(event -> {
+            collection.setDescription(description.getText());
+        });
 
         goToCollections.setOnAction(event -> {
             App.setRoot(COLLECTIONS_FXML);

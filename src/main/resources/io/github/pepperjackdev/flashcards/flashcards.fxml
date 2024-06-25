@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -23,13 +24,18 @@
          </content>
       </ScrollPane>
    </center>
-   <top>
-      <Pane prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </top>
    <right>
       <Pane prefWidth="30.0" BorderPane.alignment="CENTER" />
    </right>
    <left>
       <Pane prefWidth="30.0" BorderPane.alignment="CENTER" />
    </left>
+   <top>
+      <VBox alignment="CENTER" minHeight="70.0">
+         <children>
+            <TextField fx:id="title" />
+            <TextField fx:id="description" />
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

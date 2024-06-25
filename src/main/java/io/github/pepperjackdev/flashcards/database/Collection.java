@@ -144,6 +144,7 @@ public class Collection {
 
             insertNewFlashcard.execute();
 
+            updateDatetimeOfLastModification();
             return new Flashcard(flashcardId, connectionString);
 
         } catch (SQLException e) {
@@ -190,6 +191,8 @@ public class Collection {
             deleteFlashcard.setString(1, flashcardId);
 
             deleteFlashcard.execute();
+
+            updateDatetimeOfLastModification();
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="50.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -24,7 +24,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
-                  <Label fx:id="description" text="Collection's description" />
+                  <Label fx:id="description" text="Collection's description" wrapText="true" />
                </children>
             </StackPane>
             <StackPane alignment="CENTER_LEFT">
@@ -36,7 +36,7 @@
       </VBox>
    </left>
    <right>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ButtonBar maxHeight="40.0" maxWidth="200.0" BorderPane.alignment="CENTER">
          <buttons>
             <Button fx:id="view" mnemonicParsing="false" text="View" />
             <Button fx:id="review" mnemonicParsing="false" text="Review" />

@@ -43,6 +43,8 @@ public class Flashcard {
 
             setQuestion.execute();
 
+            getParentCollection().updateDatetimeOfLastModification();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,6 +73,8 @@ public class Flashcard {
             setAnswer.setString(2, flashcardId);
 
             setAnswer.execute();
+
+            getParentCollection().updateDatetimeOfLastModification();
 
         } catch (SQLException e) {
             e.printStackTrace();

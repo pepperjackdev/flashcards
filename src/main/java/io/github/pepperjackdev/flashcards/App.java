@@ -14,8 +14,6 @@ import java.io.IOException;
 public class App
     extends Application{
 
-    // FIXME resizing system
-
     private static Stage stage;
     public static Database database = new Database();
 
@@ -48,7 +46,6 @@ public class App
         try {
             return loader.load();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }
@@ -60,7 +57,6 @@ public class App
         try {
             return loader.load();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }

@@ -9,6 +9,7 @@ import io.github.pepperjackdev.flashcards.database.Flashcard;
 public class ReviewSession {
     @SuppressWarnings("unused")
     private Collection collection;
+    
     private List<Flashcard> flashcards;
     private int currentFlashcardIndex = 0;
 

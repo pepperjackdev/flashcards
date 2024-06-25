@@ -5,6 +5,8 @@ import static io.github.pepperjackdev.flashcards.constants.Constants.FLASHCARDS_
 import static io.github.pepperjackdev.flashcards.constants.Constants.REVIEW_COLLECTION_FXML;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import io.github.pepperjackdev.flashcards.App;
@@ -42,7 +44,7 @@ public class CollectionFrame
 
         title.setText(collection.getTitle());
         description.setText(collection.getDescription());
-        lastModified.setText(collection.getDatetimeOfLastModification().toString());
+        lastModified.setText("Last modified " + collection.getDatetimeOfLastModification().format(DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm").localizedBy(Locale.ENGLISH)));
 
         //
         // initialize the buttons behaviors

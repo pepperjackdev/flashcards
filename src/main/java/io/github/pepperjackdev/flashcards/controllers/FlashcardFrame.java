@@ -32,16 +32,22 @@ public class FlashcardFrame
         question.setText(flashcard.getQuestion());
         answer.setText(flashcard.getAnswer());
 
+        // make the question and answer to fit the rows of the content
+        question.setPrefRowCount(question.getText().split("\n").length);
+        answer.setPrefRowCount(answer.getText().split("\n").length);
+
         //
         // init the buttons behaviors
         //
 
         question.setOnKeyTyped(e -> {
             flashcard.setQuestion(question.getText());
+            question.setPrefRowCount(question.getText().split("\n").length);
         });
 
         answer.setOnKeyTyped(e -> {
             flashcard.setAnswer(answer.getText());
+            answer.setPrefRowCount(answer.getText().split("\n").length);
         });
 
         delete.setOnAction(e -> {
