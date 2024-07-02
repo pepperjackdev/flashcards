@@ -29,7 +29,7 @@
       <Pane prefWidth="30.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="reviewFrame" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="text" text="A blank page: the most dangerous question" wrapText="true" />
          </children>

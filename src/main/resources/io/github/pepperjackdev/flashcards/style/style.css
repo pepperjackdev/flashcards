@@ -1,4 +1,50 @@
 
+* {
+    -primary: #00171f;
+    -secondary: #ffffff;
+    -focused: #4d4d4d;
+}
+
+.root, #collectionsList {
+    -fx-background-color: -primary;
+}
+
 ScrollPane {
+    -fx-border-color: transparent;
     -fx-background-color: transparent;
+}
+
+Label {
+    -fx-text-fill: -secondary;
+}
+
+TextArea, TextField {
+    -fx-control-inner-background: -primary;
+    -fx-background-color: -primary;
+    -fx-border-color: -secondary;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-prompt-text-fill: -focused;
+    -fx-text-fill: -secondary;
+    -fx-background-radius: 0;
+}
+
+TextArea .content {
+    -fx-background-radius: 0;
+}
+
+BorderPane, StackPane, ScrollPane, VBox {
+    -fx-background-color: -primary;
+}
+
+Button {
+    -fx-background-color: -secondary;
+}
+
+Button:hover {
+    -fx-background-color: -focused;
+    -fx-text-fill: -secondary;
+}
+
+Button:hover:pressed {
+    -fx-background-color: -primary;
 }

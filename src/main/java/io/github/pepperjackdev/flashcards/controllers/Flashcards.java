@@ -59,11 +59,11 @@ public class Flashcards
         // init the buttons behaviors
         //
 
-        title.setOnKeyPressed(event -> {
+        title.setOnKeyTyped(event -> {
             collection.setTitle(title.getText());
         });
 
-        description.setOnKeyPressed(event -> {
+        description.setOnKeyTyped(event -> {
             collection.setDescription(description.getText());
         });
 

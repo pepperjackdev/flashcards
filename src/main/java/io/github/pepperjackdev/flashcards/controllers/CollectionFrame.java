@@ -16,7 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 
 public class CollectionFrame
     implements Initializable, Loadable<Collection> {
@@ -77,6 +79,14 @@ public class CollectionFrame
         });
 
         review.setOnAction(event -> {
+
+            if (collection.getFlashcards().isEmpty()) {
+                Alert alert = new Alert(AlertType.ERROR, "This collection is empty... add at least one flashcard to start a review session.", ButtonType.OK);
+                alert.setTitle("Empty Collection");
+                alert.show();
+                return;
+            }
+
             Review controller = new Review();
             controller.load(collection);
             

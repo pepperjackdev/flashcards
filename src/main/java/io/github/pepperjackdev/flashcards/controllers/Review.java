@@ -9,6 +9,7 @@ import io.github.pepperjackdev.flashcards.database.Collection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 
 public class Review 
     implements Loadable<Collection> {
@@ -20,6 +21,7 @@ public class Review
 
     @FXML Label text;
 
+    @FXML StackPane reviewFrame;
     @FXML Button previous;
     @FXML Button stop;
     @FXML Button flip;
@@ -42,6 +44,15 @@ public class Review
             if (review.hasNextFlashcard()) {
                 review.next();
                 update();
+            }
+        });
+
+        reviewFrame.setOnMouseClicked(e -> {
+            // does the same as "flip"
+            if (text.getText().equals(review.current().getQuestion())) {
+                update(review.current().getAnswer());
+            } else {
+                update(review.current().getQuestion());
             }
         });
 
