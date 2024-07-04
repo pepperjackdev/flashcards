@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class Collection {
+    public static final String COLLECTION_TITLE_REGEX = "[\\w\\-\\:\\ ]{2,32}";
+    public static final String COLLECTION_DESCRIPTION_REGEX = "[\\w\\-\\:\\ ]{2,128}";
+
     private final String connectionString;
     private final String collectionId;
 
@@ -39,7 +42,12 @@ public class Collection {
         }
     }
 
-    public void setTitle(String title) {
+    public boolean setTitle(String title) {
+
+        if (!title.matches(COLLECTION_TITLE_REGEX)) {
+            return false;
+        }
+
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement updateCollectionTitle = connection.prepareStatement("update collections set title=? where collectionId=?");
 
@@ -48,8 +56,11 @@ public class Collection {
 
             updateCollectionTitle.execute();
 
+            return true;
+
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -68,7 +79,12 @@ public class Collection {
         }
     }
 
-    public void setDescription(String description) {
+    public boolean setDescription(String description) {
+
+        if (!description.matches(COLLECTION_DESCRIPTION_REGEX)) {
+            return false;
+        }
+
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement updateCollectionDescription = connection.prepareStatement("update collections set description=? where collectionId=?");
 
@@ -77,8 +93,11 @@ public class Collection {
 
             updateCollectionDescription.execute();
 
+            return true;
+
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

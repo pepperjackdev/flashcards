@@ -65,6 +65,7 @@ public class Database {
                     "\tflashcardId text,\r\n" + //
                     "\tquestion text,\r\n" + //
                     "\tanswer text,\r\n" + //
+                    "\tdifficulty integer,\r\n" + //
                     "\tcollectionId text\r\n" + //
                 ");"
             );
@@ -87,6 +88,11 @@ public class Database {
     }
 
     public Collection createNewCollection(String title, String description) {
+
+        if (!title.matches(Collection.COLLECTION_TITLE_REGEX) || !description.matches(Collection.COLLECTION_DESCRIPTION_REGEX)) {
+            return null;
+        }
+
         String collectionId = UUID.randomUUID().toString();
 
         try (Connection connection = DriverManager.getConnection(connectionString)) {

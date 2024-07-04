@@ -81,6 +81,49 @@ public class Flashcard {
         }
     }
 
+    public int getDifficulty() {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement getDifficulty = connection.prepareStatement("select difficulty from flashcards where flashcardId=?");
+            getDifficulty.setString(1, this.flashcardId);
+
+            getDifficulty.execute();
+
+            ResultSet difficulty = getDifficulty.getResultSet();
+            return difficulty.getInt("difficulty");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    private void setDifficulty(int difficulty) {
+        try (Connection connection = DriverManager.getConnection(connectionString)) {
+            PreparedStatement setDifficulty = connection.prepareStatement("update flashcards set difficulty=? where flashcardId=?");
+            setDifficulty.setInt(1, difficulty);
+            setDifficulty.setString(2, flashcardId);
+
+            setDifficulty.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void increaseDifficulty() {
+        setDifficulty(getDifficulty() + 1);
+    }
+
+    public void decreaseDifficulty() {
+
+        if (getDifficulty() == 0) {
+            // nothing to do
+            return;
+        }
+
+        setDifficulty(getDifficulty() - 1);
+    }
+
     public Collection getParentCollection() {
         try (Connection connection = DriverManager.getConnection(connectionString)) {
             PreparedStatement getCollectionId = connection.prepareStatement("select collectionId from flashcards where flashcardId=?");

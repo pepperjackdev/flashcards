@@ -26,7 +26,8 @@ public class Review
     @FXML Button stop;
     @FXML Button flip;
     @FXML Button flipAll;
-    @FXML Button next;
+    @FXML Button easy;
+    @FXML Button hard;
 
     @Override
     public void load(Collection collection) {
@@ -40,11 +41,14 @@ public class Review
         // let's init the data
         update();
 
-        next.setOnAction(e -> {
-            if (review.hasNextFlashcard()) {
-                review.next();
-                update();
-            }
+        easy.setOnAction(e -> {
+            review.current().decreaseDifficulty();
+            next();
+        });
+
+        hard.setOnAction(e -> {
+            review.current().increaseDifficulty();
+            next();
         });
 
         reviewFrame.setOnMouseClicked(e -> {
@@ -82,6 +86,16 @@ public class Review
         });
     }
 
+    private void next() {
+        if (review.hasNextFlashcard()) {
+            review.next();
+            update();
+        } else {
+            // end our review session, go back to collections
+            App.setRoot(COLLECTIONS_FXML);
+        }
+    }
+
     public void update() {
         update(flipped ? review.current().getAnswer() : review.current().getQuestion());
     }
@@ -94,12 +108,6 @@ public class Review
             previous.setDisable(true);
         } else {
             previous.setDisable(false);
-        }
-
-        if (!review.hasNextFlashcard()) {
-            next.setDisable(true);
-        } else {
-            next.setDisable(false);
         }
 
     }

@@ -60,11 +60,21 @@ public class Flashcards
         //
 
         title.setOnKeyTyped(event -> {
-            collection.setTitle(title.getText());
+            boolean result = collection.setTitle(title.getText());
+            if (!result) {
+                int caret = title.getCaretPosition();
+                title.setText(collection.getTitle());
+                title.positionCaret(caret);
+            }
         });
 
         description.setOnKeyTyped(event -> {
-            collection.setDescription(description.getText());
+            boolean result = collection.setDescription(description.getText());
+            if (!result) {
+                int caret = description.getCaretPosition();
+                description.setText(collection.getDescription());
+                description.positionCaret(caret);
+            }
         });
 
         goToCollections.setOnAction(event -> {

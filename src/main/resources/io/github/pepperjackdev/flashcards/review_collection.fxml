@@ -15,7 +15,8 @@
             <Button fx:id="stop" mnemonicParsing="false" text="Stop" />
             <Button fx:id="flip" mnemonicParsing="false" text="Flip" />
             <Button fx:id="flipAll" mnemonicParsing="false" text="Flip all" />
-            <Button fx:id="next" mnemonicParsing="false" text="Next" />
+            <Button fx:id="easy" mnemonicParsing="false" text="Easy" />
+            <Button fx:id="hard" mnemonicParsing="false" text="Hard" />
          </buttons>
       </ButtonBar>
    </bottom>
