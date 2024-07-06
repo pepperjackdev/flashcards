@@ -24,7 +24,7 @@
             </StackPane>
             <StackPane alignment="CENTER_LEFT" prefWidth="200.0">
                <children>
-                  <Label fx:id="description" text="Collection's description" wrapText="true" />
+                  <Label fx:id="description" style="-fx-text-fill: #8F8F8F;" text="Collection's description" wrapText="true" />
                </children>
             </StackPane>
             <StackPane alignment="CENTER_LEFT">
