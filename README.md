@@ -5,5 +5,5 @@ A simple flashcards application written in Java using SQLite and JavaFX. This si
 ### 1. Cloning the repository into your environment and running it via maven
 You can clone this repository by running:
 <code>git clone https://www.github.com/pepperjackdev/flashcards.git</code>
-### 2. Donwloading the universal Jar
+### 2. Downloading the universal Jar
 Coming soon!
